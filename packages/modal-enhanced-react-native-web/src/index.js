@@ -59,6 +59,7 @@ class ReactNativeModal extends Component {
     backdropOpacity: PropTypes.number,
     backdropTransitionInTiming: PropTypes.number,
     backdropTransitionOutTiming: PropTypes.number,
+    withoutBackdrop: PropTypes.bool,
     children: PropTypes.node.isRequired,
     isVisible: PropTypes.bool,
     hideModalContentWhileAnimating: PropTypes.bool,
@@ -86,6 +87,7 @@ class ReactNativeModal extends Component {
     backdropOpacity: 0.7,
     backdropTransitionInTiming: 300,
     backdropTransitionOutTiming: 300,
+    withoutBackdrop: false,
     onModalShow: () => null,
     onModalHide: () => null,
     isVisible: false,
@@ -475,7 +477,7 @@ class ReactNativeModal extends Component {
         onRequestClose={onBackButtonPress}
         {...otherProps}
       >
-        <TouchableWithoutFeedback onPress={onBackdropPress}>
+          {!withoutBackdrop && <TouchableWithoutFeedback onPress={onBackdropPress}>
           <View
             ref={this.handleBackdropRef}
             useNativeDriver={useNativeDriver}
@@ -489,6 +491,7 @@ class ReactNativeModal extends Component {
             ]}
           />
         </TouchableWithoutFeedback>
+}
 
         {avoidKeyboard && (
           <KeyboardAvoidingView
